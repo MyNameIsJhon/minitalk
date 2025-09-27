@@ -48,7 +48,6 @@ static void	send_chr(char c, int pid)
 	i = 0;
 	while (i < 8)
 	{
-		usleep(DATA_SPEED);
 		if ((c >> i) & 1)
 			kill(pid, SIGUSR2);
 		else
