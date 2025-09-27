@@ -25,7 +25,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	{
 		tmp = start->next;
 		if (start->type == TYPE_PTR && del)
-			del(start->u.content);
+			del(start->u_ctt.content);
 		free(start);
 		start = tmp;
 	}

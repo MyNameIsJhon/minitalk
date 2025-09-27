@@ -20,7 +20,7 @@ t_list	*ft_lstnew_i(int i)
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (!lst)
 		return (NULL);
-	lst->u.i = i;
+	lst->u_ctt.i = i;
 	lst->next = NULL;
 	lst->type = TYPE_INT;
 	return (lst);

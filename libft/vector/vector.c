@@ -68,21 +68,14 @@ t_vector	*vec_strappend(t_vector *vec, char *data)
 	return (vec);
 }
 
-void vec_strappend_char(t_vector *vec, char c)
+void	vec_strappend_char(t_vector *vec, char c)
 {
-    if (!vec)
-        return;
-    if (vec->actual + 1 >= vec->max)
-    {
-        vec = vec_realloc(vec);
-        if (!vec)
-            return;
-    }
-    ((char *)vec->content)[vec->actual] = c;
-    vec->actual += 1;
-    ((char *)vec->content)[vec->actual] = '\0';
-}
+	char	buf[2];
 
+	buf[0] = c;
+	buf[1] = '\0';
+	vec_strappend(vec, buf);
+}
 
 void	vec_free(t_vector *vec)
 {

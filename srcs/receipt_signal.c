@@ -6,7 +6,7 @@
 /*   By: jriga <jriga@student.s19.be>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 22:38:36 by jriga             #+#    #+#             */
-/*   Updated: 2025/07/26 22:50:23 by jriga            ###   ########.fr       */
+/*   Updated: 2025/07/26 22:39:58 by jriga            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,10 @@ void	receipt_signal(int sig, siginfo_t *info, void *context)
 	static char		c;
 	static t_bool	ready;
 	static t_vector	*str;
-	static int		pid;
 
 	(void)context;
 	if (ready == 0)
-	{
-		pid = info->si_pid;
 		init_receiver(&str, &ready);
-	}
-	else if (info->si_pid != pid)
-	{
-		finish_message(&str, info->si_pid, &i, &ready);
-		init_receiver(&str, &ready);
-		c = 0;
-	}
 	if (sig == SIGUSR2)
 		c |= (1 << i);
 	i++;

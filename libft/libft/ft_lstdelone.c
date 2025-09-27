@@ -18,6 +18,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (!lst)
 		return ;
 	if (lst->type == TYPE_PTR && del)
-		del(lst->u.content);
+		del(lst->u_ctt.content);
 	free(lst);
 }

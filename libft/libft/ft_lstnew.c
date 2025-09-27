@@ -20,7 +20,7 @@ t_list	*ft_lstnew(void *content)
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (!lst)
 		return (NULL);
-	lst->u.content = content;
+	lst->u_ctt.content = content;
 	lst->next = NULL;
 	lst->type = TYPE_PTR;
 	return (lst);

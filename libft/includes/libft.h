@@ -39,7 +39,7 @@ typedef struct s_list
 		int		i;
 		char	chr;
 		long	l;
-	}				u;
+	}				u_ctt;
 	t_type			type;
 	struct s_list	*next;
 }		t_list;

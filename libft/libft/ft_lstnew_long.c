@@ -20,7 +20,7 @@ t_list	*ft_lstnew_l(long l)
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (!lst)
 		return (NULL);
-	lst->u.l = l;
+	lst->u_ctt.l = l;
 	lst->next = NULL;
 	lst->type = TYPE_LONG;
 	return (lst);

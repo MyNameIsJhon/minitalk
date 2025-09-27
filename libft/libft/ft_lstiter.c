@@ -19,7 +19,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	while (lst)
 	{
 		if (lst->type == TYPE_PTR)
-			f(lst->u.content);
+			f(lst->u_ctt.content);
 		lst = lst->next;
 	}
 }

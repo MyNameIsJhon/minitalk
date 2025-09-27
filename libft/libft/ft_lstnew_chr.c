@@ -20,7 +20,7 @@ t_list	*ft_lstnew_chr(char chr)
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (!lst)
 		return (NULL);
-	lst->u.chr = chr;
+	lst->u_ctt.chr = chr;
 	lst->next = NULL;
 	lst->type = TYPE_CHAR;
 	return (lst);
