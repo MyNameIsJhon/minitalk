@@ -13,17 +13,24 @@
 #include "vector.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <limits.h>
 
 #define VEC_MULTIPLIER 2
 
 t_vector	*vector_init(int size_type, size_t space)
 {
 	t_vector	*vec;
+	size_t		total_size;
 
+	if (size_type <= 0 || space == 0)
+		return (NULL);
+	if (space > SIZE_MAX / size_type)
+		return (NULL);
+	total_size = size_type * space;
 	vec = ft_malloc(sizeof(t_vector));
 	if (!vec)
 		return (NULL);
-	vec->content = ft_malloc(size_type * space);
+	vec->content = ft_malloc(total_size);
 	if (!vec->content)
 	{
 		ft_free(vec);
@@ -40,12 +47,22 @@ t_vector	*vector_init(int size_type, size_t space)
 static t_vector	*vec_realloc(t_vector *vec)
 {
 	void	*new;
+	size_t	new_max;
+	size_t	new_size;
 
-	new = ft_realloc(vec->content, (vec->max * vec->size_type) * VEC_MULTIPLIER);
+	if (!vec)
+		return (NULL);
+	if (vec->max > SIZE_MAX / VEC_MULTIPLIER)
+		return (NULL);
+	new_max = vec->max * VEC_MULTIPLIER;
+	if (new_max > SIZE_MAX / vec->size_type)
+		return (NULL);
+	new_size = new_max * vec->size_type;
+	new = ft_realloc(vec->content, new_size);
 	if (!new)
 		return (NULL);
 	vec->content = new;
-	vec->max *= VEC_MULTIPLIER;
+	vec->max = new_max;
 	return (vec);
 }
 
@@ -58,13 +75,15 @@ t_vector	*vec_strappend(t_vector *vec, char *data)
 	len = ft_strlen(data);
 	while (vec->actual + len >= vec->max)
 	{
-		vec = vec_realloc(vec);
-		if (!vec)
-			return (NULL);
+		t_vector *new_vec = vec_realloc(vec);
+		if (!new_vec)
+			return (vec); // Don't leak, return original
+		vec = new_vec;
 	}
 	ft_memcpy((char *)vec->content + vec->actual, data, len);
 	vec->actual += len;
-	((char *)vec->content)[vec->actual] = '\0';
+	if (vec->size_type == sizeof(char))
+		((char *)vec->content)[vec->actual] = '\0';
 	return (vec);
 }
 
@@ -72,6 +91,8 @@ void	vec_strappend_char(t_vector *vec, char c)
 {
 	char	buf[2];
 
+	if (!vec)
+		return;
 	buf[0] = c;
 	buf[1] = '\0';
 	vec_strappend(vec, buf);
