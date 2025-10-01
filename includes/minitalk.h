@@ -13,7 +13,7 @@
 # define MINITALK_H
 
 # include <signal.h>
-# define DATA_SPEED 20 
+# define DATA_SPEED 50 
 
 void	receipt_init(struct sigaction *sig);
 void	receipt_signal(int sig, siginfo_t *info, void *context);

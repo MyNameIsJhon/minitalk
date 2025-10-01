@@ -41,7 +41,7 @@ static t_vector	*vec_realloc(t_vector *vec)
 {
 	void	*new;
 
-	new = ft_realloc(vec->content, vec->max * VEC_MULTIPLIER);
+	new = ft_realloc(vec->content, (vec->max * vec->size_type) * VEC_MULTIPLIER);
 	if (!new)
 		return (NULL);
 	vec->content = new;
