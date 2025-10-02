@@ -24,7 +24,7 @@ static void	init_receiver(t_vector **str, t_bool *ready)
 
 static void	finish_message(t_vector **str, pid_t pid, int *i, t_bool *ready)
 {
-	ft_printf("[PID: %d]: %s, %d\n",
+	ft_printf("[PID: %d]: %s\n",
 		pid,
 		(*str)->content,
 		ft_strlen((*str)->content));
